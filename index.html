@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Results summary component</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main>
+    <h1 class="sr-only">Results and Summary</h1>
+    <div class="results-card">
+      <div class="total">
+        <h2 class="total__title">Your Result</h2>
+
+        <div class="total__pct">
+          <p class="total__score">76</p>
+          <p class="total__full">of 100</p>
+        </div>
+        
+        <p class="great">Great</p>
+        <p class="results-desc">You scored higher than 65% of the people who have taken these tests.</p>
+      </div>
+      <div class="summary">
+        <h2 class="summary__title">Summary</h2>
+
+        <ul class="summary__breakdown">
+          <li class="reaction">
+            <div class="label">
+              <img src="./assets/images/icon-reaction.svg" alt="" aria-hidden>
+              <p>Reaction</p>
+            </div>
+            <div class="component-score">
+              <p class="component-pct"> / 100</p>
+            </div>
+          </li>
+          <li class="memory">
+            <div class="label">
+              <img src="./assets/images/icon-memory.svg" alt="" aria-hidden>
+              <p>Memory</p>
+            </div>
+            <div class="component-score">
+              <p class="component-pct"> / 100</p>
+            </div>
+          </li>
+          <li class="verbal">
+            <div class="label">
+              <img src="./assets/images/icon-verbal.svg" alt="" aria-hidden>
+              <p>Verbal</p>
+            </div>
+            <div class="component-score">
+              <p class="component-pct"> / 100</p>
+            </div>
+          </li>
+          <li class="visual">
+            <div class="label">
+              <img src="./assets/images/icon-visual.svg" alt="" aria-hidden>
+              <p>Visual</p>
+            </div>
+            <div class="component-score">
+              <p class="component-pct">/ 100</p>
+            </div>
+          </li>
+        </ul>
+
+        <a href="/" class="cont-btn">Continue</a>
+      </div>
+    </div>
+  </main>
+  
+  <script>
+    const results = document.querySelectorAll(".component-pct");
+
+    const fetchScores = () => {
+      fetch("./data.json")
+        .then((response) => response.json())
+        .then((data) => {
+          const scores = [];
+          data.forEach((result) => {
+            scores.push(result.score);
+          })
+          return scores
+        })
+        .then((scores) => renderData(scores))
+    }
+
+    const renderData = (scores) => {
+      for (let i = 0; i < scores.length; i++) {
+        results[i].insertAdjacentHTML("afterbegin", `<span>${scores[i]}</span>`)
+      }
+    }
+
+    fetchScores()
+  </script>
+</body>
+</html>

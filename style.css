@@ -270,6 +270,7 @@ body {
     }
     .total__score {
         font-size: 4rem;
+        font-weight: var(--fw-bold);
     }
     .total__full {
         margin-top: -0.8rem;
@@ -277,11 +278,13 @@ body {
     }
     .great {
         font-size: 1.6rem;
-        letter-spacing: 0.5px;
+        letter-spacing: 1px;
+        font-weight: var(--fw-bold)
     }
     .results-desc {
         margin-top: -1rem;
         font-size: 1rem;
+        line-height: 1.3;
     }
 
     .summary {
